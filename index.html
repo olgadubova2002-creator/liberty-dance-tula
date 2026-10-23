@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/logo-vk-256.webp" type="image/webp">
+<title>Liberty Dance - свободные танцы в Туле</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d1615">
+<meta name="description" content="Школа танцев Liberty Dance в Туле: дети от 3 лет и взрослые, группы для начинающих и уровня PRO, девять направлений, два зала.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  /* Палитра взята с логотипа группы ВК: аквамарин #00fffe и тёмный #172726. Пропорции из выданной палитры: один фон, один текст, один акцент. */
+  :root {
+    --bg: #0d1615; --surface: #172726; --ink: #ffffff; --muted: #9fb5b2;
+    --accent: #00fffe; --accent-ink: #0d1615;
+    --field-2: #ffffff; --field-2-ink: #0d1615;
+    /* Bebas Neue из выданной пары не содержит кириллицы, взята близкая узкая гарнитура Oswald */
+    --display: "Oswald", "Arial Narrow", Impact, sans-serif;
+    --text: "EB Garamond", Georgia, "Times New Roman", serif;
+    --step-small: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);
+    --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+    --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+    --step-head: clamp(2.5rem, 1.2rem + 5vw, 5.5rem);
+    --m: clamp(16px, 2.2vw, 32px);
+    --gap: clamp(88px, 12vw, 200px);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font: 400 var(--step-body)/1.45 var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  .d { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: -0.02em; line-height: .92; }
+
+  .skip { position: absolute; left: var(--m); top: -80px; z-index: 30; background: var(--accent); color: var(--accent-ink); padding: 12px 18px; text-decoration: none; }
+  .skip:focus { top: 12px; }
+
+  /* шапка */
+  .bar { position: fixed; z-index: 20; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 18px var(--m); background: var(--bg); }
+  .bar__mark { font: 500 1.9rem/1 var(--display); letter-spacing: -.01em; text-decoration: none; text-transform: uppercase; display: inline-flex; align-items: center; gap: 12px; }
+  .bar__mark img { width: 44px; height: 44px; border-radius: 50%; }
+  .bar nav { display: flex; gap: clamp(14px, 2.4vw, 36px); align-items: center; font-size: var(--step-small); }
+  .bar nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  .bar nav a:hover { color: var(--accent); }
+  @media (max-width: 700px) { .bar nav a:not(.bar__tel) { display: none; } .bar__tel { font-size: 1rem; white-space: nowrap; } .bar__mark { font-size: 1.45rem; white-space: nowrap; gap: 8px; } .bar__mark img { width: 36px; height: 36px; } .bar { gap: 12px; } }
+
+  /* первый экран: кольцо кадров вокруг заголовка */
+  .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: var(--bg); }
+  .ring a { position: absolute; display: block; overflow: hidden; transform: translate(-50%, -50%); background: var(--surface); color: #fff; text-decoration: none; transition: opacity .25s ease; }
+  .ring a img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ring:hover a, .ring:focus-within a { opacity: .45; }
+  .ring a:hover, .ring a:focus-visible { opacity: 1; z-index: 2; }
+  .hero__core { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; padding: 0 var(--m); pointer-events: none; }
+  .hero__core > * { pointer-events: auto; }
+  .hero h1 { font-size: clamp(56px, 5.4vw + 20px, 112px); line-height: .9; max-width: 11ch; }
+  .hero__sub { margin-top: 24px; max-width: 40ch; font-size: 1.125rem; min-height: 3.2em; }
+  .btn { display: inline-block; margin-top: 8px; background: var(--ink); color: var(--bg); padding: 14px 30px; font: 500 1.5rem/1 var(--display); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; transition: background-color .15s ease, color .15s ease, transform .15s ease; }
+  .btn:hover { background: var(--accent); color: var(--accent-ink); }
+  .btn:active { transform: translateY(1px); }
+  @media (max-width: 700px) { .hero h1 { font-size: 10.5vw; } .hero__sub { font-size: 1rem; } .btn { width: 100%; text-align: center; } .hero__core { width: min(66vw, 300px); margin-inline: auto; } }
+
+  /* разделы */
+  section { padding-block: var(--gap) 0; }
+  .wrap { padding-inline: var(--m); }
+  h2.d { font-size: clamp(40px, 4vw + 14px, 84px); line-height: .92; max-width: 22ch; }
+
+  /* направления: заголовок + подбор по возрасту + таблица справа */
+  .dirs h2 { padding-left: 3vw; }
+  .dirs__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--m); margin-top: 88px; }
+  .dirs__side { grid-column: 1 / 5; align-self: end; }
+  .dirs__side figure { background: var(--surface); aspect-ratio: 4/5; width: 22vw; min-width: 220px; overflow: hidden; }
+  .dirs__side img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .dirs__main { grid-column: 7 / 13; }
+  .age { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .age button { font: inherit; font-size: 1.0625rem; background: var(--surface); color: var(--ink); border: 0; min-height: 44px; padding: 0 18px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  .age button:hover { background: #23403d; }
+  .age button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .age__label { flex-basis: 100%; color: var(--muted); font-size: var(--step-small); margin-bottom: 4px; }
+  .rows { list-style: none; padding: 0; }
+  .rows li { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 20px; padding-block: 13px; align-items: center; }
+  .thumb { grid-row: 1 / 3; width: clamp(76px, 8vw, 120px); aspect-ratio: 4/3; background: var(--surface); overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .rows li:nth-child(4n+1) { padding-top: 34px; }
+  .rows li:first-child { padding-top: 0; }
+  .rows b { font-weight: 500; font-size: 1.1875rem; }
+  .rows small { grid-column: 2; color: var(--muted); font-size: var(--step-small); }
+  .rows a { grid-column: 3; grid-row: 1 / 3; align-self: center; display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--accent); }
+  .rows a:hover { text-decoration: underline; }
+  .rows li[hidden] { display: none; }
+  .age__status { color: var(--muted); font-size: var(--step-small); margin: -24px 0 28px; min-height: 1.45em; }
+  .dirs__note { margin-top: 36px; color: var(--muted); font-size: var(--step-small); max-width: 46ch; }
+  @media (max-width: 860px) {
+    .dirs h2 { padding-left: 0; }
+    .dirs__grid { grid-template-columns: 1fr; margin-top: 48px; }
+    .dirs__main, .dirs__side { grid-column: 1; }
+    .dirs__side { margin-top: 48px; display: flex; justify-content: flex-end; }
+    .dirs__side figure { width: 60%; }
+  }
+
+  /* как начать: лестница */
+  .how h2 { margin-bottom: 72px; }
+  .how__list { display: grid; grid-template-columns: repeat(10, 1fr); gap: 56px var(--m); list-style: none; padding: 0; }
+  .how__list li:nth-child(1) { grid-column: 1 / 11; }
+  .how__list li:nth-child(2) { grid-column: 3 / 11; }
+  .how__list li:nth-child(3) { grid-column: 5 / 11; }
+  .how__list li:nth-child(4) { grid-column: 7 / 11; }
+  .how__list p.d { font-size: clamp(36px, 3.4vw + 14px, 92px); line-height: 1; }
+  .how__list li:last-child p.d { color: var(--accent); }
+  .how__list span { display: block; margin-top: 12px; max-width: 34ch; color: var(--muted); font-size: 1.0625rem; }
+  @media (max-width: 700px) {
+    .how__list { grid-template-columns: 1fr; gap: 40px; }
+    .how__list li:nth-child(n) { grid-column: 1; }
+    .how__list li:nth-child(2) { margin-left: 6vw; } .how__list li:nth-child(3) { margin-left: 12vw; } .how__list li:nth-child(4) { margin-left: 18vw; }
+    .how__list p.d { font-size: 8.4vw; line-height: 1.02; }
+  }
+
+  /* залы и отчётные концерты */
+  .gal h2 { margin-bottom: 64px; }
+  .gal figure { margin: 0; }
+  .gal figcaption { margin-top: 14px; font-size: var(--step-small); color: var(--muted); }
+  .gal figcaption b { display: block; font-weight: 500; font-size: 1.1875rem; color: var(--ink); }
+  .gal__halls { display: grid; grid-template-columns: 1fr 1fr; gap: var(--m); }
+  .gal__show { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--m); margin-top: clamp(72px, 9vw, 140px); align-items: start; }
+  .gal__text { grid-column: 1 / 5; display: grid; gap: 20px; justify-items: start; align-self: center; }
+  .gal__text h3 { font-size: clamp(32px, 2.6vw + 12px, 60px); }
+  .gal__text p { max-width: 38ch; }
+  .gal__text .btn { margin-top: 4px; }
+  .gal__big { grid-column: 5 / 13; }
+  .gal img { width: 100%; height: auto; background: var(--surface); object-fit: cover; }
+  .gal__halls img { aspect-ratio: 4/3; }
+  .gal__big img { aspect-ratio: 3/2; }
+  .gal__strip img { aspect-ratio: 3/2; }
+  .gal__note { max-width: 60ch; margin: -32px 0 48px; color: var(--muted); font-size: var(--step-small); }
+  .gal__strip { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--m); }
+  @media (max-width: 860px) {
+    .gal__halls { grid-template-columns: 1fr; }
+    .gal__text, .gal__big { grid-column: 1 / 13; }
+    .gal__strip { grid-template-columns: 1fr; }
+    .gal__text .btn { width: 100%; text-align: center; }
+  }
+
+  /* контакты: адреса строками */
+  .contact h2 { margin-bottom: 48px; }
+  .crow { display: block; text-decoration: none; padding: 0 var(--m); font: 500 clamp(44px, 6vw, 88px)/1 var(--display); text-transform: uppercase; letter-spacing: -.01em; height: clamp(84px, 10.5vw, 150px); display: flex; align-items: flex-end; padding-bottom: clamp(10px, 1.8vw, 24px); }
+  .crows > :nth-child(odd) { background: var(--surface); }
+  a.crow:hover { color: var(--accent); }
+  .crow--hi { background: var(--accent) !important; color: var(--accent-ink); gap: 24px; justify-content: flex-start; }
+  .crow--hi i { font-style: normal; display: inline-grid; place-items: center; width: .9em; height: .9em; border-radius: 50%; background: var(--accent-ink); color: var(--accent); font-size: .6em; margin-bottom: .12em; }
+  @media (max-width: 700px) { .crow { font-size: 9.6vw; height: 84px; } }
+
+  /* призыв: одно слово = кнопка */
+  .cta { padding-top: var(--gap); }
+  .cta a { position: relative; display: block; background: var(--accent); color: var(--accent-ink); height: 60svh; min-height: 360px; text-decoration: none; padding: 20px var(--m); transition: background-color .01s, color .01s; }
+  .cta a:hover, .cta a:focus-visible { background: var(--accent-ink); color: var(--accent); outline-offset: -6px; }
+  .cta p { max-width: 30ch; font-size: 1.25rem; }
+  .cta svg { position: absolute; top: 20px; right: var(--m); width: 48px; height: 48px; }
+  .cta .d { position: absolute; left: var(--m); right: var(--m); bottom: 24px; font-size: clamp(60px, 17.2vw, 330px); line-height: .8; white-space: nowrap; }
+  @media (max-width: 700px) { .cta a { height: 46svh; } .cta .d { font-size: 20vw; } .cta svg { width: 32px; height: 32px; } }
+
+  /* подвал: имя на всю ширину */
+  footer { margin-top: var(--gap); background: var(--field-2); color: var(--field-2-ink); padding: 28px var(--m) 20px; overflow: hidden; }
+  footer .d { font-size: clamp(60px, 15.6vw, 330px); line-height: .8; white-space: nowrap; letter-spacing: -.035em; }
+  footer p { margin-top: 18px; font-size: var(--step-small); }
+
+  /* появление частей раздела */
+  .rv { opacity: 0; transform: translateY(24px); transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+  .rv.in, .no-js .rv { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .rv { opacity: 1; transform: none; transition: none; } .ring a { transition: none; } }
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+
+<a class="skip" href="#napravleniya">К направлениям</a>
+<header class="bar">
+  <a class="bar__mark" href="#top"><img src="assets/logo-vk-256.webp" width="44" height="44" alt="">Liberty Dance</a>
+  <nav aria-label="Разделы">
+    <a href="#napravleniya">Направления</a>
+    <a href="#start">Как начать</a>
+    <a href="#zaly">Залы и концерты</a>
+    <a href="#adresa">Адреса</a>
+    <a class="bar__tel" href="tel:+79105873225">+7 (910) 587-32-25</a>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- Кольцо: фото из группы студии во ВКонтакте; подпись кадра появляется под заголовком при наведении. -->
+  <section class="hero" style="padding:0" aria-label="Liberty Dance - свободные танцы в Туле">
+    <div class="ring" id="ring">
+      <a href="#zaly" aria-label="Inside Dance Festival 2019, Москва" data-n="Inside Dance Festival 2019, Москва"><img src="assets/photos/fest-grupp.webp" width="1046" height="701" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Новогодний утренник для малышей, 2019" data-n="Новогодний утренник для малышей, 2019"><img src="assets/photos/utrennik.webp" width="1280" height="960" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Дети на Inside Dance Festival 2019" data-n="Дети на Inside Dance Festival 2019"><img src="assets/photos/fest-kids-1.webp" width="1046" height="701" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Занятие в светлом зале с окнами" data-n="Занятие в светлом зале с окнами"><img src="assets/photos/zal-zanyatie.webp" width="1280" height="960" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Сольный номер на Inside Dance Festival 2019" data-n="Сольный номер на Inside Dance Festival 2019"><img src="assets/photos/fest-solo.webp" width="422" height="701" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Новогодняя вечеринка Mouse Party, 2019" data-n="Новогодняя вечеринка Mouse Party, 2019"><img src="assets/photos/party-1.webp" width="1280" height="960" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Групповой номер на Inside Dance Festival 2019" data-n="Групповой номер на Inside Dance Festival 2019"><img src="assets/photos/fest-blue.webp" width="1046" height="701" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Зал с зеркалом, станком и паркетом" data-n="Зал с зеркалом, станком и паркетом"><img src="assets/photos/zal-prazdnik.webp" width="768" height="1024" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Младшая группа, Inside Dance Festival 2019" data-n="Младшая группа, Inside Dance Festival 2019"><img src="assets/photos/fest-kids-2.webp" width="1046" height="701" alt="" loading="eager"></a>
+      <a href="#zaly" aria-label="Новогодняя вечеринка в зале студии" data-n="Новогодняя вечеринка в зале студии"><img src="assets/photos/party-2.webp" width="1280" height="960" alt="" loading="eager"></a>
+    </div>
+    <div class="hero__core">
+      <h1 class="d">Liberty Dance</h1>
+      <p class="hero__sub" id="sub" data-default="Свободные танцы в Туле: дети от 3 лет и взрослые, от новичков до PRO.">Свободные танцы в Туле: дети от 3 лет и взрослые, от новичков до PRO.</p>
+      <a class="btn" href="tel:+79105873225">Позвонить</a>
+    </div>
+  </section>
+
+  <section class="dirs wrap" id="napravleniya" aria-labelledby="h-dirs">
+    <h2 class="d" id="h-dirs">Найдите направление по возрасту</h2>
+    <div class="dirs__grid">
+      <div class="dirs__side"><figure><img src="assets/photos/party-1.webp" width="1280" height="960" alt="Группа подростков в шапках-масках на новогодней вечеринке студии" loading="lazy" decoding="async"></figure></div>
+      <div class="dirs__main">
+        <div class="age" role="group" aria-label="Возраст">
+          <span class="age__label">Сколько лет тому, кто будет танцевать?</span>
+          <button type="button" data-age="0" aria-pressed="true">Все</button>
+          <button type="button" data-age="3" aria-pressed="false">3-4 года</button>
+          <button type="button" data-age="5" aria-pressed="false">5-7 лет</button>
+          <button type="button" data-age="8" aria-pressed="false">8 лет</button>
+          <button type="button" data-age="9" aria-pressed="false">9 лет</button>
+          <button type="button" data-age="10" aria-pressed="false">10-14 лет</button>
+          <button type="button" data-age="15" aria-pressed="false">15 и старше</button>
+        </div>
+        <p class="age__status" id="agest" role="status" aria-live="polite">Показаны все 9 направлений</p>
+        <ul class="rows" id="rows">
+          <li data-min="3" data-max="7" data-slug="detskie"><span class="thumb" aria-hidden="true"></span><b>Детские танцы</b><small>3-4 года и 5-7 лет, отдельные группы</small><a href="tel:+79105873225" aria-label="Узнать цену: Детские танцы">Цена: уточнить</a></li>
+          <li data-min="8" data-max="99" data-slug="hip-hop-house"><span class="thumb" aria-hidden="true"></span><b>Hip-hop, house</b><small>от 8 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Hip-hop, house">Цена: уточнить</a></li>
+          <li data-min="9" data-max="99" data-slug="modern"><span class="thumb" aria-hidden="true"></span><b>Современная хореография, modern</b><small>от 9 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Современная хореография, modern">Цена: уточнить</a></li>
+          <li data-min="10" data-max="99" data-slug="vogue-jazz-funk"><span class="thumb" aria-hidden="true"></span><b>Vogue, jazz funk</b><small>от 10 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Vogue, jazz funk">Цена: уточнить</a></li>
+          <li data-min="10" data-max="99" data-slug="eksperiment"><span class="thumb" aria-hidden="true"></span><b>Экспериментальная хореография</b><small>новинка, от 10 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Экспериментальная хореография">Цена: уточнить</a></li>
+          <li data-min="15" data-max="99" data-slug="lady-style"><span class="thumb" aria-hidden="true"></span><b>Lady style</b><small>от 15 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Lady style">Цена: уточнить</a></li>
+          <li data-min="15" data-max="99" data-slug="twerk"><span class="thumb" aria-hidden="true"></span><b>Twerk</b><small>от 15 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Twerk">Цена: уточнить</a></li>
+          <li data-min="15" data-max="99" data-slug="latina"><span class="thumb" aria-hidden="true"></span><b>Latina show</b><small>от 15 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Latina show">Цена: уточнить</a></li>
+          <li data-min="15" data-max="99" data-slug="belly-dance"><span class="thumb" aria-hidden="true"></span><b>Belly dance, восточные танцы</b><small>от 15 лет</small><a href="tel:+79105873225" aria-label="Узнать цену: Belly dance, восточные танцы">Цена: уточнить</a></li>
+        </ul>
+        <p class="dirs__note">Есть набор в группы для начинающих и для уровня PRO, а также групповые и индивидуальные занятия для детей и взрослых. Студия выступает на всероссийских и городских чемпионатах с судьями международного уровня.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how wrap" id="start" aria-labelledby="h-how">
+    <h2 class="d" id="h-how">Как прийти на первое занятие</h2>
+    <ol class="how__list">
+      <li class="rv"><p class="d">Сначала выберите направление.</p><span>Возраст в списке выше показывает, в какую группу вас возьмут.</span></li>
+      <li class="rv" style="--d:80ms"><p class="d">Потом позвоните.</p><span>Скажем, где есть место, какой уровень вам подходит и сколько стоит занятие.</span></li>
+      <li class="rv" style="--d:160ms"><p class="d">Выберите зал.</p><span>Каракозова, 71 или ТРЦ Платоновский: что ближе к дому или работе.</span></li>
+      <li class="rv" style="--d:240ms"><p class="d">И приходите в свою группу.</p><span>Новички занимаются с новичками, уровень PRO - отдельно.</span></li>
+    </ol>
+  </section>
+
+  <!-- Залы и концерты: фото из группы студии во ВКонтакте. Фото отчётных концертов студии: добавить вместо кадров фестиваля, когда будут. -->
+  <section class="gal wrap" id="zaly" aria-labelledby="h-gal">
+    <h2 class="d" id="h-gal">Залы, праздники и концерты</h2>
+    <p class="gal__note">Фото из группы студии во ВКонтакте: Inside Dance Festival 2019, занятия и новогодние праздники.</p>
+
+    <div class="gal__halls">
+      <figure><img src="assets/photos/zal-zanyatie.webp" width="1280" height="960" alt="Занятие в светлом зале с большими окнами: девушки в свободных позах" loading="lazy" decoding="async"><figcaption><b>Светлый зал с окнами</b>Занятие в зале студии</figcaption></figure>
+      <figure><img src="assets/photos/zal-prazdnik.webp" width="768" height="1024" alt="Зал с зеркальной стеной, станком и паркетным полом, две танцовщицы в костюмах" loading="lazy" decoding="async" style="object-position:50% 62%"><figcaption><b>Зал с зеркалом и станком</b>Паркетный пол, зеркальная стена</figcaption></figure>
+    </div>
+
+    <div class="gal__show">
+      <div class="gal__text">
+        <h3 class="d">Отчётные концерты</h3>
+        <p>Студия выступает на всероссийских и городских чемпионатах с судьями международного уровня. На снимках: Inside Dance Festival 2019 в Москве.</p>
+        <p>Дату, площадку и программу ближайшего отчётного концерта назовём по телефону.</p>
+        <a class="btn" href="tel:+79105873225">Позвонить про концерт</a>
+      </div>
+      <figure class="gal__big"><img src="assets/photos/fest-grupp.webp" width="1046" height="701" alt="Команда студии в синих костюмах на сцене Inside Dance Festival: танцоры сидят и тянутся друг к другу" loading="lazy" decoding="async"><figcaption>Команда студии на Inside Dance Festival 2019, Москва</figcaption></figure>
+      <div class="gal__strip">
+        <figure><img src="assets/photos/fest-kids-1.webp" width="1046" height="701" alt="Дети в зелёно-белых костюмах танцуют на сцене фестиваля" loading="lazy" decoding="async"><figcaption>Дети на сцене Inside Dance Festival 2019</figcaption></figure>
+        <figure><img src="assets/photos/fest-kids-2.webp" width="1046" height="701" alt="Младшая группа с поднятыми руками перед экраном фестиваля" loading="lazy" decoding="async"><figcaption>Младшая группа, Inside Dance Festival 2019</figcaption></figure>
+        <figure><img src="assets/photos/party-2.webp" width="1280" height="960" alt="Подростки и взрослые в шапках-масках на новогодней вечеринке в зале с зеркалами" loading="lazy" decoding="async"><figcaption>Новогодняя вечеринка Mouse Party, 2019</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="adresa" aria-labelledby="h-adr">
+    <div class="wrap"><h2 class="d" id="h-adr">Два зала в Туле</h2></div>
+    <div class="crows">
+    <a class="crow" href="https://yandex.ru/maps/?text=Тула, улица Каракозова, 71" rel="noopener">Каракозова, 71</a>
+    <div class="crow" style="color:var(--muted)">Территория фитнес-центра N-Ergo</div>
+    <a class="crow" href="https://yandex.ru/maps/?text=Тула, Калужское шоссе, 1А" rel="noopener">Калужское шоссе, 1А</a>
+    <div class="crow" style="color:var(--muted)">ТРЦ Платоновский, 3 этаж, ВФорме</div>
+    <a class="crow" href="tel:+79105873225">+7 (910) 587-32-25</a>
+    <a class="crow" href="tel:+79190787281">+7 (919) 078-72-81</a>
+    <a class="crow crow--hi" href="https://vk.ru/libertydancetula" rel="noopener">Написать во ВКонтакте <i aria-hidden="true"><svg viewBox="0 0 24 24" width="62%" height="62%"><path d="M6 18 18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></i></a>
+    </div>
+  </section>
+
+  <section class="cta" aria-label="Позвонить в студию">
+    <a href="tel:+79105873225">
+      <p>Позвоните - подберём группу под возраст и уровень.</p>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36 36 12M18 12h18v18" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+      <span class="d">Позвонить</span>
+    </a>
+  </section>
+</main>
+
+<footer>
+  <div class="d" aria-hidden="true">Liberty Dance</div>
+  <p>Свободные танцы, Тула. Демо: цены и расписание подставим позже. Фото занятий, праздников и фестиваля - из группы студии во ВКонтакте (vk.ru/libertydancetula); кадры Inside Dance Festival: Julia Checkmareva.</p>
+</footer>
+
+<script>
+(function () {
+  // кольцо кадров вокруг заголовка
+  var hero = document.querySelector('.hero'), ring = document.getElementById('ring'), frames = ring.children, sub = document.getElementById('sub');
+  function place() {
+    var w = hero.clientWidth, h = hero.clientHeight, phone = w < 700, n = frames.length;
+    var rx = phone ? w * 0.66 : Math.min(w * 0.39, 560), ry = phone ? rx : Math.min(h * 0.34, 330);
+    var cx = w / 2, cy = h / 2;
+    for (var i = 0; i < n; i++) {
+      var t = -Math.PI / 2 + i * 2 * Math.PI / n, s = Math.sin(t), c = Math.cos(t);
+      var size = phone ? 64 + 24 * (s + 1) / 2 : 100 + 50 * (s + 1) / 2;
+      var rot = Math.atan2(ry * c, -rx * s) * 180 / Math.PI; if (rot > 90) rot -= 180; if (rot < -90) rot += 180;
+      rot = Math.max(-30, Math.min(30, rot));
+      var f = frames[i]; f.style.left = (cx + rx * c) + 'px'; f.style.top = (cy + ry * s) + 'px';
+      f.style.width = size + 'px'; f.style.height = size * (i % 2 ? 1.33 : 0.75) + 'px';
+      f.style.transform = 'translate(-50%,-50%) rotate(' + rot + 'deg)';
+    }
+  }
+  place(); window.addEventListener('resize', place);
+  function say(a) { sub.textContent = a ? a.dataset.n : sub.dataset.default; }
+  Array.prototype.forEach.call(frames, function (a) {
+    a.addEventListener('mouseenter', function () { say(a); }); a.addEventListener('focus', function () { say(a); });
+    a.addEventListener('mouseleave', function () { say(); }); a.addEventListener('blur', function () { say(); });
+  });
+
+  // фото направлений: файлы лежат в assets/directions, список - в photos.json ({"hip-hop-house": "hip-hop.jpg"}); нет файла - остаётся плитка-заглушка
+  fetch('assets/directions/photos.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (map) {
+    function put(host, slug, alt) {
+      if (!map[slug]) return;
+      var img = new Image(); img.alt = alt || ''; img.decoding = 'async'; img.src = 'assets/directions/' + map[slug];
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+      host.insertBefore(img, host.firstChild);
+    }
+    document.querySelectorAll('#rows li').forEach(function (li) { var t = li.querySelector('.thumb'); t.style.position = 'relative'; put(t, li.dataset.slug, ''); });
+  });
+
+  // живой элемент: подбор направлений по возрасту
+  var btns = document.querySelectorAll('.age button'), rows = document.querySelectorAll('#rows li');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var age = +b.dataset.age;
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      var shown = 0; rows.forEach(function (r) { r.hidden = age > 0 && !(age >= +r.dataset.min && age <= +r.dataset.max); if (!r.hidden) shown++; }); document.getElementById('agest').textContent = age > 0 ? b.textContent + ': подходит ' + shown + ' из ' + rows.length : 'Показаны все ' + rows.length + ' направлений';
+    });
+  });
+
+  // появление частей раздела
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .15 });
+    rv.forEach(function (el) { io.observe(el); });
+  } else rv.forEach(function (el) { el.classList.add('in'); });
+})();
+</script>
+</body>
+</html>
